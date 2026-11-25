@@ -23,13 +23,14 @@
             </h1>
 
             <!-- Form -->
-            <form onsubmit="handleLogin(event)" class="w-full space-y-4">
+            <form method="POST" action="{{ url('/login') }}" class="w-full space-y-4">
                 <!-- Email Input -->
                 <div class="flex flex-col space-y-1">
                     <label class="font-bold text-xs text-gray-700">Email Address</label>
                     <input 
                         id="email"
-                        type="email" 
+                        type="email"
+                        name="email"
                         placeholder="name@example.com" 
                         class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 placeholder-gray-400"
                         required
@@ -44,7 +45,8 @@
                     </div>
                     <input 
                         id="password"
-                        type="password" 
+                        type="password"
+                        name="password"
                         placeholder="••••••••••••" 
                         class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 placeholder-gray-400"
                         required
@@ -75,12 +77,6 @@
         </div>
     </div>
 
-    <script>
-        function handleLogin(e) {
-            e.preventDefault();
-            // Simple redirect on login
-            window.location.href = '/dashboard';
-        }
-    </script>
+    
 </body>
 </html>
