@@ -21,9 +21,21 @@
             <h1 class="font-bold text-xl text-gray-900 mb-6 text-center">
                 Sign in to your account
             </h1>
-
+            @if (session('msg'))
+                <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-red-800 rounded-md flex items-center gap-3"
+                    role="alert">
+                    <svg class="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="text-sm font-medium text-center">{{ session('msg') }}</span>
+                </div>
+            @endif
+            
             <!-- Form -->
             <form method="POST" action="{{ url('/login') }}" class="w-full space-y-4">
+                @csrf
                 <!-- Email Input -->
                 <div class="flex flex-col space-y-1">
                     <label class="font-bold text-xs text-gray-700">Email Address</label>

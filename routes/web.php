@@ -9,7 +9,7 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login');
 
 Route::get('/create-account', function () {
     return view('create-account');
@@ -21,7 +21,7 @@ Route::get('/forgot-password', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->name('dashboard');
 
 Route::get('/analytics', function () {
     return view('analytics');
