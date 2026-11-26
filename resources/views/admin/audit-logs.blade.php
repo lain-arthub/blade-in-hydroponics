@@ -54,7 +54,7 @@
                 </div>
             </header>
             <main class="flex-1 p-8 flex flex-col bg-gray-100 font-sans text-gray-800">
-                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5 max-w-5xl">
+                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5 ">
                     <div class="flex justify-between items-start">
                         <div>
                             <h2 class="text-base font-bold text-gray-900 m-0">Audit Logs</h2>

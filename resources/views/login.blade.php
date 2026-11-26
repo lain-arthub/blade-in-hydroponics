@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HydroSmart - Login</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.13/dist/index.global.min.js"></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
             <!-- Logo Header -->
             <div class="flex items-center space-x-2 mb-6">
                 <div class="w-12 h-12 rounded-full border border-gray-200 p-1 flex items-center justify-center">
-                    <img src="assets/HydroSmart.png" alt="HydroSmart Logo" /> 
+                    <img src="assets/HydroSmart.png" alt="HydroSmart Logo" />
                 </div>
                 <span class="font-bold text-xl text-gray-900 tracking-tight">HydroSmart</span>
             </div>
@@ -21,6 +22,7 @@
             <h1 class="font-bold text-xl text-gray-900 mb-6 text-center">
                 Sign in to your account
             </h1>
+
             @if (session('msg'))
                 <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-red-800 rounded-md flex items-center gap-3"
                     role="alert">
@@ -32,18 +34,18 @@
                     <span class="text-sm font-medium text-center">{{ session('msg') }}</span>
                 </div>
             @endif
-            
+
             <!-- Form -->
             <form method="POST" action="{{ url('/login') }}" class="w-full space-y-4">
                 @csrf
                 <!-- Email Input -->
                 <div class="flex flex-col space-y-1">
-                    <label class="font-bold text-xs text-gray-700">Email Address</label>
-                    <input 
+                    <label for="email" class="font-bold text-xs text-gray-700">Email Address</label>
+                    <input
                         id="email"
                         type="email"
                         name="email"
-                        placeholder="name@example.com" 
+                        placeholder="name@example.com"
                         class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 placeholder-gray-400"
                         required
                     />
@@ -52,17 +54,29 @@
                 <!-- Password Input -->
                 <div class="flex flex-col space-y-1">
                     <div class="flex justify-between items-center">
-                        <label class="font-bold text-xs text-gray-700">Password</label>
+                        <label for="password" class="font-bold text-xs text-gray-700">Password</label>
                         <a href="/forgot-password" class="text-xs text-green-600 hover:underline font-medium">Forgot password?</a>
                     </div>
-                    <input 
-                        id="password"
-                        type="password"
-                        name="password"
-                        placeholder="••••••••••••" 
-                        class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 placeholder-gray-400"
-                        required
-                    />
+
+                    <div class="relative flex items-center">
+                        <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            placeholder="••••••••••••"
+                            class="w-full rounded-md border border-gray-300 pl-3 pr-10 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600 focus:border-green-600 placeholder-gray-400"
+                            required
+                        />
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            aria-label="Show password"
+                            aria-pressed="false"
+                            class="absolute right-2.5 text-gray-400 hover:text-gray-700 focus:outline-none cursor-pointer"
+                        >
+                            <i id="eyeIcon" class="fa-regular fa-eye-slash"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Submit Button -->
@@ -72,12 +86,29 @@
                 >
                     Login
                 </button>
-                
-              
             </form>
         </div>
     </div>
 
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
+
+            if (!toggleBtn || !passwordInput || !eyeIcon) return;
+
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = passwordInput.type === 'password';
+
+                passwordInput.type = isPassword ? 'text' : 'password';
+                eyeIcon.classList.toggle('fa-eye', isPassword);
+                eyeIcon.classList.toggle('fa-eye-slash', !isPassword);
+
+                toggleBtn.setAttribute('aria-pressed', String(isPassword));
+                toggleBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+            });
+        });
+    </script>
 </body>
 </html>

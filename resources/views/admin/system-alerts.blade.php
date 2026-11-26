@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HydroSmart - Admin System Alerts & Configuration</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.1.13/dist/index.global.min.js"></script>
+    <script src="../js/"></script>
+    
 </head>
 <body class="font-sans">
     <div class="flex h-screen bg-[#f3f4f6]">
@@ -54,7 +56,7 @@
                 </div>
             </header>
             <main class="flex-1 p-8 flex flex-col bg-gray-100 font-sans text-gray-800">
-                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5 max-w-5xl">
+                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5 ">
                     <div class="flex justify-between items-start">
                         <div>
                             <h2 class="text-base font-bold text-gray-900 m-0">System Alerts & Configuration</h2>
