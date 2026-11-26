@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FarmController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -48,13 +49,14 @@ Route::middleware('auth:web')->group(function (){
 
     Route::get('/admin/user-management', [UserController::class, 'index'])->name('admin-usermanagement');
 
-    Route::get('/admin/farm-management', function () {
-        return view('admin.farm-management');
-    });
+    Route::get('/admin/farm-management', [FarmController::class, 'index'])->name('admin-farmmanagement');
+    Route::post('/admin/add-farm', [FarmController::class, 'create'])->name('create-farm');
+    
+
 
     Route::get('/admin/audit-logs', function () {
         return view('admin.audit-logs');
-    })  ;
+    });
 
     Route::get('/admin/system-alerts', function () {
         return view('admin.system-alerts');

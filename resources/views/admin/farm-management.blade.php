@@ -70,28 +70,43 @@
                     </div>
                     
                     <div class="divide-y divide-gray-100">
-                        <div class="py-3.5 flex items-center justify-between first:pt-0 last:pb-0">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-lg bg-emerald-100/70 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                        @forelse ($farm as $f)
+                            <div
+                                class="group py-3 px-2 -mx-2 rounded-xl flex items-center justify-between hover:bg-gray-50/80 transition-colors duration-150">
+                                <div class="flex items-center gap-3.5 min-w-0">
+                                    <!-- Icon Container -->
+                                    <div
+                                        class="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-150">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </div>
+
+                                    <!-- Text Hierarchy -->
+                                    <div class="flex flex-col min-w-0">
+                                        <span class="text-sm font-semibold text-gray-900 truncate">
+                                            {{ $f['name'] }}
+                                        </span>
+                                        <span class="text-xs text-gray-500 truncate mt-0.5">
+                                            {{ $f['location'] }}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-bold text-gray-900 leading-tight">Madrid Setup 1</span>
-                                </div>
+
+                                <!-- Subtle Chevron / Action Cue -->
+                                <svg class="w-4 h-4 text-gray-300 group-hover:text-gray-500 group-hover:translate-x-0.5 transition-all shrink-0 ml-2"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
                             </div>
-                           
-                        </div>
-                        <div class="py-3.5 flex items-center justify-between first:pt-0 last:pb-0">
-                            <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-lg bg-emerald-100/70 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span class="text-xs font-bold text-gray-900 leading-tight">Caraga Nursery</span>
-                                </div>
+                        @empty
+                            <div class="py-8 text-center text-sm text-gray-400">
+                                No farms available yet.
                             </div>
-                            
-                        </div>
+                        @endforelse
                     </div>
                     <div class="pt-2 border-t border-gray-100 text-[11px] text-gray-400">
                         All devices synced · Last checked just now
@@ -109,7 +124,7 @@
             <h3 class="text-lg font-bold text-gray-900">Add New Farm</h3>
             <button onclick="closeAddFarmModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">&times;</button>
         </div>
-        <form id="addFarmForm" class="space-y-4" onsubmit="handleAddFarm(event)">
+        <form id="addFarmForm" class="space-y-4" method="POST" action="{{ url('/admin/add-farm') }}">
             <div>
                 <label class="block text-xs font-medium text-gray-700 mb-1">Farm Name</label>
                 <input type="text" name="name" required placeholder="e.g., Green Valley Farm" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
@@ -118,10 +133,7 @@
                 <label class="block text-xs font-medium text-gray-700 mb-1">Location</label>
                 <input type="text" name="location" required placeholder="e.g., Madrid, Spain" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent">
             </div>
-            <div>
-                <label class="block text-xs font-medium text-gray-700 mb-1">Description</label>
-                <textarea name="description" rows="3" placeholder="Optional description" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"></textarea>
-            </div>
+            
             <div class="flex justify-end gap-2 pt-2">
                 <button type="button" onclick="closeAddFarmModal()" class="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition-colors">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-emerald-600 text-white text-sm font-medium rounded-lg hover:bg-emerald-700 transition-colors">Add Farm</button>
@@ -145,48 +157,6 @@
         document.getElementById('addFarmForm').reset();
     }
 
-    function handleAddFarm(event) {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-        const farmData = Object.fromEntries(formData.entries());
-        
-        // Frontend-only: Show success and add to list visually
-        console.log('Add Farm (frontend only):', farmData);
-        alert('Farm added successfully! (Frontend demo - no backend)');
-        
-        // Optionally add to the list visually
-        addFarmToList(farmData);
-        closeAddFarmModal();
-    }
-
-    function addFarmToList(farm) {
-        const farmList = document.querySelector('.divide-y.divide-gray-100');
-        const farmHtml = `
-            <div class="py-3.5 flex items-center justify-between first:pt-0 last:pb-0">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-lg bg-emerald-100/70 text-emerald-600 flex items-center justify-center flex-shrink-0">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-xs font-bold text-gray-900 leading-tight">${farm.name}</span>
-                        <span class="text-[11px] text-gray-400 mt-0.5">${farm.location}</span>
-                    </div>
-                </div>
-                <button onclick="alert('Opening farm config...')" class="flex items-center gap-1.5 border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm transition-colors">
-                    <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-                    Farm Config
-                </button>
-            </div>
-        `;
-        farmList.insertAdjacentHTML('beforeend', farmHtml);
-        
-        // Update farm count
-        const countBadge = document.querySelector('.bg-emerald-100.text-emerald-700');
-        if (countBadge) {
-            const currentCount = parseInt(countBadge.textContent.match(/\d+/)?.[0] || '0');
-            countBadge.textContent = `${currentCount + 1} farms connected`;
-        }
-    }
 
     // Close modal on Escape key
     document.addEventListener('keydown', (e) => {
