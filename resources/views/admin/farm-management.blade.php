@@ -54,7 +54,7 @@
                 </div>
             </header>
             <main class="flex-1 p-8 flex flex-col bg-gray-100 font-sans text-gray-800">
-                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5 max-w-5xl">
+                <div class="bg-white rounded-xl p-6 shadow-sm flex flex-col gap-5">
                     <div class="flex justify-between items-start">
                         <div>
                             <h2 class="text-base font-bold text-gray-900 m-0">Farm Management</h2>
@@ -65,18 +65,10 @@
                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                                 Add Farm
                             </button>
-                            <button class="text-emerald-600 hover:text-emerald-700 transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" /></svg>
-                            </button>
+                            
                         </div>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-700">2 farms connected</span>
-                        <button onclick="alert('Map view coming soon')" class="flex items-center gap-1.5 text-xs font-semibold text-emerald-600 hover:underline">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            Map view
-                        </button>
-                    </div>
+                    
                     <div class="divide-y divide-gray-100">
                         <div class="py-3.5 flex items-center justify-between first:pt-0 last:pb-0">
                             <div class="flex items-center gap-3">
@@ -85,13 +77,9 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <span class="text-xs font-bold text-gray-900 leading-tight">Madrid Setup 1</span>
-                                    <span class="text-[11px] text-gray-400 mt-0.5">Madrid · 4 connected devices</span>
                                 </div>
                             </div>
-                            <button onclick="alert('Opening farm config...')" class="flex items-center gap-1.5 border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm transition-colors">
-                                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-                                Farm Config
-                            </button>
+                           
                         </div>
                         <div class="py-3.5 flex items-center justify-between first:pt-0 last:pb-0">
                             <div class="flex items-center gap-3">
@@ -100,13 +88,9 @@
                                 </div>
                                 <div class="flex flex-col">
                                     <span class="text-xs font-bold text-gray-900 leading-tight">Caraga Nursery</span>
-                                    <span class="text-[11px] text-gray-400 mt-0.5">Caraga · 8 connected devices</span>
                                 </div>
                             </div>
-                            <button onclick="alert('Opening farm config...')" class="flex items-center gap-1.5 border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 text-xs font-semibold px-3 py-1.5 rounded-lg shadow-sm transition-colors">
-                                <svg class="w-3.5 h-3.5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>
-                                Farm Config
-                            </button>
+                            
                         </div>
                     </div>
                     <div class="pt-2 border-t border-gray-100 text-[11px] text-gray-400">

@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'lname'     => 'Baterbonia',
             'email'     => 'divineadili@gmail.com',
             'password'  => 'starofmindanao123',
+            'admin'     => true,
         ]);
     }
 }

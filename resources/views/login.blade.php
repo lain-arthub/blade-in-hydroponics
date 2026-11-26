@@ -73,18 +73,7 @@
                     Login
                 </button>
                 
-                <button
-                    type="button"
-                    onclick="window.location.href='/admin/user-management'"
-                    class="w-full rounded-md bg-emerald-600 hover:bg-emerald-700 py-2.5 text-white font-medium text-xs transition duration-150 ease-in-out mt-2"
-                >
-                    Admin Login
-                </button>
-
-                <!-- Create Account Link -->
-                <div class="text-center pt-2">
-                    <a class="text-xs text-emerald-600 hover:underline font-medium" href="/create-account">Create Account</a>
-                </div>
+              
             </form>
         </div>
     </div>

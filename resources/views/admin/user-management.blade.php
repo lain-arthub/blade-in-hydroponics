@@ -59,6 +59,30 @@
                         <h2 class="text-base font-bold m-0">Users</h2>
                         <a href="/admin/add-user" class="bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium px-4 py-2 rounded-lg">Add User</a>
                     </div>
+                    @if (session('msg'))
+                        <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-green-800 rounded-md flex items-center gap-3"
+                            role="alert">
+                            <svg class="w-5 h-5 text-green-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm font-medium text-center">{{ session('msg') }}</span>
+                        </div>
+                    @endif
+                    
+                    @if (session('error'))
+                        <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-red-800 rounded-md flex items-center gap-3"
+                            role="alert">
+                            <svg class="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm font-medium text-center">{{ session('error') }}</span>
+                        </div>
+                    @endif
+
                     <div class="overflow-x-auto">
                         <table class="w-full text-sm">
                             <thead>
@@ -69,13 +93,69 @@
                                     <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="border-b border-gray-100">
-                                    <td class="py-3 px-4 text-gray-700">Eullaine C.</td>
-                                    <td class="py-3 px-4 text-gray-700">eullaine@example.com</td>
-                                    <td class="py-3 px-4 text-gray-700">User</td>
-                                    <td class="py-3 px-4"><span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-700">Active</span></td>
-                                </tr>
+                            <tbody class="divide-y divide-gray-200 bg-white text-sm">
+                                @foreach ($users as $u)
+                                    <tr class="hover:bg-gray-50 transition-colors duration-150">
+                                        <!-- Name -->
+                                        <td class="py-3.5 px-4 font-medium text-gray-900 whitespace-nowrap">
+                                            {{ $u['fname'] . ' ' . $u['lname'] }}
+                                        </td>
+
+                                        <!-- Email -->
+                                        <td class="py-3.5 px-4 text-gray-500 whitespace-nowrap">
+                                            {{ $u['email'] }}
+                                        </td>
+
+                                        <!-- Role Badge -->
+                                        <td class="py-3.5 px-4 whitespace-nowrap">
+                                            @if ($u['admin'])
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700 ring-1 ring-inset ring-indigo-600/20">
+                                                    Admin
+                                                </span>
+                                            @else
+                                                <span
+                                                    class="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium bg-gray-100 text-gray-600 ring-1 ring-inset ring-gray-500/10">
+                                                    User
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <!-- Status Badge -->
+                                        <td class="py-3.5 px-4 whitespace-nowrap">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+                                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                Active
+                                            </span>
+                                        </td>
+
+                                        <!-- Delete Action -->
+                                        <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                                            @if ($u['admin'] == false)
+                                                <a href="{{ url('/delete-account', ['id' => $u['id']]) }}" type="button"
+                                                    class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-red-500/40"
+                                                    title="Delete user">
+                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                    </svg>
+                                                    <span>Delete</span>
+                                                </a>
+                                            @else
+                                                <span
+                                                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-600/20">
+                                                    <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                                    Root Account
+                                                </span>
+                                            @endif
+
+
+
+                                        </td>
+
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

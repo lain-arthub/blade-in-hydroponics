@@ -16,9 +16,11 @@ class LoginController extends Controller
 
 
         if($validator->fails()) {
-            return response()->json([
-                'msg' => $validator->messages()->first(),
-            ], 422);
+            return  redirect()
+                    ->route('login')
+                    ->with([
+                        'msg' => 'Invalid Input',
+                    ]);
         }
 
         
@@ -43,8 +45,18 @@ class LoginController extends Controller
             // return response()->json([
             //     'msg' => 'Sakto'
             // ]);
-            return  redirect()
+
+            $user = Auth::user();
+            if($user->admin == true) {
+                return  redirect()
+                    ->route('admin-usermanagement');
+            } else {
+                return  redirect()
                     ->route('dashboard');
+            }
+
+
+            
                    
         } else {
             // if mali

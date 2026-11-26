@@ -56,20 +56,68 @@
             <main class="flex-1 p-8">
                 <div class="bg-white rounded-xl p-6 shadow-sm max-w-md">
                     <h2 class="text-base font-bold m-0 mb-4">Add New User</h2>
-                    <form onsubmit="handleAddUser(event)" class="space-y-4">
+
+                    @if (session('msg'))
+                        <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-green-800 rounded-md flex items-center gap-3"
+                            role="alert">
+                            <svg class="w-5 h-5 text-green-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm font-medium text-center">{{ session('msg') }}</span>
+                        </div>
+                    @endif
+                    
+                    @if (session('error'))
+                        <div class="w-full mb-5 p-4 bg-red-50 border border-red-300 text-red-800 rounded-md flex items-center gap-3"
+                            role="alert">
+                            <svg class="w-5 h-5 text-red-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            <span class="text-sm font-medium text-center">{{ session('error') }}</span>
+                        </div>
+                    @endif
+
+
+                    <form method="POST" action="{{ url('/create-account') }}"  class="space-y-4">
                         <div>
-                            <label class="block text-xs font-bold text-gray-700 mb-1">Full Name</label>
-                            <input type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600" required />
+                            <label class="block text-xs font-bold text-gray-700 mb-1">First Name</label>
+                            <input name="fname" type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600" required />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Middle Name</label>
+                            <input name="mname" type="text" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"  />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Last Name</label>
+                            <input name="lname" type="text"
+                                class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                                required />
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 mb-1">Email</label>
-                            <input type="email" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600" required />
+                            <input name="email" type="email" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600" required />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+                            <input name="password" type="text"
+                                class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                                required />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 mb-1">Confirm Password</label>
+                            <input name="password_confirmation" type="text"
+                                class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600"
+                                required />
                         </div>
                         <div>
                             <label class="block text-xs font-bold text-gray-700 mb-1">Role</label>
-                            <select class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600">
-                                <option>User</option>
-                                <option>Admin</option>
+                            <select name="role" class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-green-600">
+                                <option value="user">User</option>
+                                <option value="admin">Admin</option>
                             </select>
                         </div>
                         <div class="flex gap-2 pt-2">
@@ -81,12 +129,6 @@
             </main>
         </div>
     </div>
-    <script>
-        function handleAddUser(e) {
-            e.preventDefault();
-            alert('User added successfully!');
-            window.location.href = '/admin/user-management';
-        }
-    </script>
+    
 </body>
 </html>
